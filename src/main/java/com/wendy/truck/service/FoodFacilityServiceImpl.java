@@ -29,6 +29,11 @@ class FoodFacilityServiceImpl implements FoodFacilityService {
 
 	private ModelToDBMapper mapper;
 
+	@PostConstruct
+	public void init() {
+		prepareData(Paths.get(CSV_PATH));
+	}
+
 	@Override
 	public void prepareData(Path path) {
 		List<WorkData> records = CSVHelper.csvToFacilities(path);
@@ -50,9 +55,10 @@ class FoodFacilityServiceImpl implements FoodFacilityService {
 		return facilities;
 	}
 
-	@PostConstruct
-	public void init() {
-		prepareData(Paths.get(CSV_PATH));
+	@Override
+	public List<FoodFacility> getTrucksbyFoodItem(String foodName) {
+		List<FoodFacility> facilities = repository.findByFoodItemsLike("%" + foodName + "%");
+		return facilities;
 	}
 
 }

@@ -13,4 +13,6 @@ public interface FoodFacilityRepository extends JpaRepository<FoodFacility, Long
 
 	List<FoodFacility> findAllByFacilityType(FacilityTypeCode facilityType);
 
+	List<FoodFacility> findByFoodItemsLike(String foodName);
+
 }

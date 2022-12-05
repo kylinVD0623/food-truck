@@ -55,4 +55,21 @@ public class FoodFacilityController {
 		}
 	}
 
+	@GetMapping("/food-truck/item")
+	public ResponseEntity<List<FoodFacility>> getTrucksbyFoodItem(String foodName) {
+		try {
+			List<FoodFacility> facilities = new ArrayList<FoodFacility>();
+
+			service.getTrucksbyFoodItem(foodName).forEach(facilities::add);
+
+			if (facilities.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+
+			return new ResponseEntity<>(facilities, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

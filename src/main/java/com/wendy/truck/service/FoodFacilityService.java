@@ -13,4 +13,6 @@ public interface FoodFacilityService {
 
 	List<FoodFacility> getAllFoodTrucks();
 
+	List<FoodFacility> getTrucksbyFoodItem(String foodName);
+
 }
